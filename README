@@ -1,0 +1,21 @@
+If a swapfile is needed, it should be created as the name "swapfile".
+Remember to commentout the corresponding line in /etc/fstab.
+
+For example, if you want to create 1 GB swapfile, you should run the following:
+$ sudo dd if=/dev/zero of=/swap/swapfile bs=1M count=1024
+$ sudo mkswap /swap/swapfile
+$ sudo chmod 600 /swap/swapfile
+$ sudo swapon /swap/swapfile
+
+And uncomment the following line in /etc/fstab.
+/swap/swapfile          swap                    swap    defaults        0 0
+
+In case of you want to delete a swapfile, disable a swapfile and delete it.
+$ sudo swapoff /swap/swapfile
+$ sudo rm /swap/swapfile
+
+And commentout the corresponding line in /etc/fstab.
+
+To know how much swap storage is reserved, use free command or see /proc/swaps.
+$ free
+$ cat /proc/swaps
